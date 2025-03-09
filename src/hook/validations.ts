@@ -1,15 +1,9 @@
 /**
- * All validation functions should return true if an error is found on the value
+ * All validation functions should return true if an error is found on the given value
  */
 interface Options {
     value: any,
     message: string
-}
-
-interface ValidationFunctions {
-    required: (value: any, options: Options) => boolean,
-    maxLength: (value: any, options: Options) => boolean,
-    minLength: (value: any, options: Options) => boolean
 }
 
 const required = (value: any, options: Options) => {
@@ -24,8 +18,18 @@ const minLength = (value: any, options: Options) => {
     return value.length < options.value;
 }
 
-export const validations : ValidationFunctions = {
+const email = (value: any, options: Options) => {
+    return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
+}
+
+const pattern = (value: RegExp, options: Options) => {
+    return !options.value.test(value);
+}
+
+export const validations = {
     required,
     maxLength,
-    minLength
+    minLength,
+    email,
+    pattern
 }
