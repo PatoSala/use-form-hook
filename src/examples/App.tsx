@@ -2,10 +2,7 @@ import { useForm } from "../hook/useForm"
 import { findFieldError } from "../hook/utils/findFieldError"
 
 function App() {
-  const { register, handleSubmit, errors } = useForm({
-    cuit: '12345',
-    lastName: 'a@b.com'
-  });
+  const { register, handleSubmit, errors } = useForm();
   
   return (
         <div className="form-container">
@@ -33,9 +30,7 @@ function App() {
           <p>{findFieldError(errors, 'firstName')?.message}</p>
 
           <input
-            {...register('lastName', {
-              initialValue: 'Perez',
-            })}
+            {...register('lastName')}
             placeholder="Apellido"
           />
           <p>{findFieldError(errors, 'lastName')?.message}</p>
@@ -69,6 +64,7 @@ function App() {
               }
             })}
           />
+          <p>{findFieldError(errors, 'phone')?.message}</p>
 
           <button onClick={(e) => {
             e.preventDefault()

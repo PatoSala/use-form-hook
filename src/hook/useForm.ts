@@ -55,15 +55,14 @@ export function useForm(defaultValues?: FormData) {
     const register = (
         name: string,
         options?: {
-            initialValue?: any,
             validations?: Validations
         }
     ) => {
         /* set initial field value */
-        fieldsToRegister.current[name] = options?.initialValue || defaultValues?.[name] || '';
+        fieldsToRegister.current[name] = defaultValues?.[name] || '';
         if (options?.validations) fieldsValidations.current[name] = options?.validations;
 
-        let attributes = {
+        return {
             name: name,
             value: formData[name] || '',
             onChange: (e: any) => {
@@ -86,9 +85,7 @@ export function useForm(defaultValues?: FormData) {
                     setErrors(copyOfErrors);
                 }
             }
-        };
-
-        return attributes;
+        };;
     }
 
     const handleSubmit = (onSubmit: (formData: FormData) => any) => {
