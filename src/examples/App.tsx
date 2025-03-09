@@ -2,7 +2,10 @@ import { useForm } from "../hook/useForm"
 import { findFieldError } from "../hook/utils/findFieldError"
 
 function App() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm({
+    cuit: '12345',
+    lastName: 'a@b.com'
+  });
   
   return (
         <div className="form-container">
@@ -24,14 +27,7 @@ function App() {
           />
           <p>{findFieldError(errors, 'cuit')?.message}</p>
           <input
-            {...register('firstName', {
-              validations: {
-                required: {
-                  value: true,
-                  message: 'El Nombre es requerido'
-                }
-              }
-            })}
+            {...register('firstName')}
             placeholder="Nombre"
           />
           <p>{findFieldError(errors, 'firstName')?.message}</p>

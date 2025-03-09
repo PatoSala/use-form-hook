@@ -38,11 +38,11 @@ interface Validations {
     }
 }
 
-export function useForm() {
+export function useForm(defaultValues?: FormData) {
     /**
      *  When register() is called, it sets a field to register
      */
-    const fieldsToRegister = useRef<FormData>({})
+    const fieldsToRegister = useRef<FormData>(defaultValues || {})
     const fieldsValidations = useRef<RegisterValidations>({})
 
     useEffect(() => {
@@ -60,11 +60,12 @@ export function useForm() {
         }
     ) => {
         /* set initial field value */
-        fieldsToRegister.current[name] = options?.initialValue || '';
+        fieldsToRegister.current[name] = options?.initialValue || defaultValues?.[name] || '';
         if (options?.validations) fieldsValidations.current[name] = options?.validations;
 
-        return {
+        let attributes = {
             name: name,
+            value: formData[name] || '',
             onChange: (e: any) => {
                 setFormData({
                     ...formData,
@@ -85,7 +86,9 @@ export function useForm() {
                     setErrors(copyOfErrors);
                 }
             }
-        }
+        };
+
+        return attributes;
     }
 
     const handleSubmit = (onSubmit: (formData: FormData) => any) => {
