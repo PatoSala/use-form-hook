@@ -1,4 +1,4 @@
-import { validations } from "../validations";
+import { validations } from "../validations/validations";
 
 interface Errors {
     [key: string]: {
@@ -23,6 +23,11 @@ export const validate = (
 
         if (fieldsValidations[fieldName]) {
             for (const validationType in fieldsValidations[fieldName]) {
+
+                if (fieldValue === '' && (fieldsValidations[fieldName]["required"] == undefined || !fieldsValidations[fieldName]["required"].value)) {
+                    continue;
+                }
+
                 const hasErrors = validations[validationType as keyof typeof validations](fieldValue, fieldsValidations[fieldName][validationType]);
 
                 if (hasErrors) {

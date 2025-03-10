@@ -1,5 +1,4 @@
-import { useForm } from "../hook/useForm"
-import { findFieldError } from "../hook/utils/findFieldError"
+import { useForm, findFieldError } from '../hook';
 
 function App() {
   const { register, handleSubmit, errors } = useForm();
@@ -9,13 +8,13 @@ function App() {
           <input
             {...register('cuit', {
               validations: {
-                required: {
-                  value: true,
-                  message: 'El CUIT es requerido'
-                },
                 minLength: {
                   value: 4,
-                  message: 'El CUIT debe tener 4 dígitos'
+                  message: 'El CUIT debe tener al menos 4 dígitos'
+                },
+                maxLength: {
+                  value: 4,
+                  message: 'El CUIT no debe tener más de 11 dígitos'
                 }
               }
             })}
@@ -24,13 +23,27 @@ function App() {
           />
           <p>{findFieldError(errors, 'cuit')?.message}</p>
           <input
-            {...register('firstName')}
+            {...register('firstName', {
+              validations: {
+                required: {
+                  value: true,
+                  message: 'El Nombre es requerido'
+                }
+              }
+            })}
             placeholder="Nombre"
           />
           <p>{findFieldError(errors, 'firstName')?.message}</p>
 
           <input
-            {...register('lastName')}
+            {...register('lastName', {
+              validations: {
+                required: {
+                  value: true,
+                  message: 'El Apellido es requerido'
+                }
+              }
+            })}
             placeholder="Apellido"
           />
           <p>{findFieldError(errors, 'lastName')?.message}</p>

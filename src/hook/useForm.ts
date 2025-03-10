@@ -97,6 +97,9 @@ export function useForm(defaultValues?: FormData) {
         }
 
         onSubmit(formData)
+
+        setErrors({});
+        setFormData(fieldsToRegister.current);
     }
 
     return {

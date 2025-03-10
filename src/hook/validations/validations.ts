@@ -7,7 +7,7 @@ interface Options {
 }
 
 const required = (value: any, options: Options) => {
-    return value === null || value === undefined || value === '';
+    return (value === null || value === undefined || value === '') === options.value;
 }
 
 const maxLength = (value: any, options: Options) => {
