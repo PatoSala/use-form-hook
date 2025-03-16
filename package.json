@@ -1,0 +1,15 @@
+{
+  "name": "use-form-hook",
+  "version": "1.0.0",
+  "description": "A simple hook to manage forms in react applications.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
