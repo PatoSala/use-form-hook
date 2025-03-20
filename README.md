@@ -1,6 +1,12 @@
 # use-form-hook
 A simple hook to manage forms in react applications.
 
+## Instalation
+
+```bash
+  npm install @patosala/use-form-hook
+```
+
 ## Usage
 
 ```javascript
@@ -24,6 +30,7 @@ function App() {
                 }
             })}
         />
+        <p>{findError(errors, "email")?.message}</p>
 
         <input
             placeholder="password"
@@ -38,6 +45,7 @@ function App() {
                 }
             })}
         />
+        <p>{findError(errors, "password")?.message}</p>
 
         <button onSubmit={handleSubmit((formData) => {
             return console.log(formData)
