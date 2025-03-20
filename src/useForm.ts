@@ -1,8 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import {
+    useEffect,
+    useRef,
+    useState } from "react";
 import { validate } from "./utils/validate";
-import { FormData } from "./interfaces/index";
+import {
+    FormData,
+    CustomValidations } from "./interfaces/index";
 
-export function useForm(defaultValues: FormData = {}) {
+export function useForm(
+    defaultValues: FormData = {},
+    customValidations: CustomValidations = {}
+) {
     /**
      *  When register() is called, it sets a field to register
      */
@@ -23,7 +31,7 @@ export function useForm(defaultValues: FormData = {}) {
         /* set initial field value */
         if (defaultValues[name] === undefined) fieldsToRegister.current[name] = "";
         if (validations) fieldsValidations.current[name] = validations;
-
+        console.log(validations)
         return {
             name: name,
             value: formData[name],
@@ -34,7 +42,7 @@ export function useForm(defaultValues: FormData = {}) {
                 })
             },
             onBlur: () => {
-                let fieldErrors = validate(formData, fieldsValidations.current, [name])
+                let fieldErrors = validate(formData, fieldsValidations.current, [name], customValidations);
                 
                 if (fieldErrors) {
                     setErrors({
@@ -51,7 +59,7 @@ export function useForm(defaultValues: FormData = {}) {
     }
 
     const handleSubmit = (onSubmit: Function) => {
-        let errorsBeforeSubmit = validate(formData, fieldsValidations.current, Object.keys(formData));
+        let errorsBeforeSubmit = validate(formData, fieldsValidations.current, Object.keys(formData), customValidations);
 
         if (errorsBeforeSubmit) {
             setErrors(errorsBeforeSubmit)

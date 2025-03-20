@@ -1,4 +1,4 @@
-import { validations } from "../validations/validations";
+import { validations as defaultValidations } from "../validations/validations";
 import { FormData, Errors, Validations } from "../interfaces/index";
 
 export const validate = (
@@ -10,11 +10,13 @@ export const validate = (
 
     /* fields to validate */
     fields: (keyof FormData)[] = [],
+    customValidations = {}
 ) => {
     let errors = {};
     fields.forEach((fieldName: keyof FormData) => {
         let fieldValue = formData[fieldName];
         let fieldError = {};
+        const validations = { ...defaultValidations, ...customValidations };
 
         if (fieldsValidations[fieldName]) {
             for (const validationType in fieldsValidations[fieldName]) {

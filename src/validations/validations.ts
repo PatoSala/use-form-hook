@@ -1,7 +1,7 @@
-
-
-const required = (value: boolean, options: any) => {
-    return (value === null || value === undefined) === options.value;
+const required = (value: any, options: any) => {
+    if (options.value) {
+        return (value === null || value === undefined || value === '') === options.value;
+    }
 }
 
 const maxLength = (value: any, options: any) => {
