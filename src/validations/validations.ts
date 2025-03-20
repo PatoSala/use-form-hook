@@ -1,18 +1,20 @@
 
 
-const required = (value: boolean, options: any) => {
-    return (value === null || value === undefined) === options.value;
+const required = (value: string, options: any) => {
+    if (options.value) {
+        return (value === null || value === undefined || value === '') === options.value;
+    }
 }
 
-const maxLength = (value: any, options: any) => {
+const maxLength = (value: string, options: any) => {
     return value.length > options.value;
 }
 
-const minLength = (value: any, options: any) => {
+const minLength = (value: string, options: any) => {
     return value.length < options.value;
 }
 
-const email = (value: any, options: any) => {
+const email = (value: string, options: any) => {
     return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
 }
 
