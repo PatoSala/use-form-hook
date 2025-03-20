@@ -6,7 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PatoSala/use-form-hook"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "form",
+    "forms",
+    "form-validation",
+    "validation",
+    "typescript",
+    "react-hooks"
+  ],
+  "author": "Pato Sala <https://github.com/PatoSala>",
+  "homepage": "https://www.npmjs.com/package/@patosala/use-form-hook",
   "license": "ISC",
   "dependencies": {
     "react": "^19.0.0",
